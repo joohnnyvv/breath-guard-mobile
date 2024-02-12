@@ -1,31 +1,63 @@
-import { StyleSheet } from 'react-native';
+import {Animated, StyleSheet} from 'react-native';
+import {Text, View} from 'react-native';
+import Colors from '@/constants/Colors';
+import {useColorScheme} from '@/components/useColorScheme';
+import GradientText from "@/components/GradientText";
+import PrimaryButton from "@/components/PrimaryButton";
+import {useEffect, useRef} from "react";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+export default function GetStarted() {
+    const colorScheme = useColorScheme();
 
-export default function TabOneScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
-  );
+    const textColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
+    const entranceAnim = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.sequence([
+            Animated.timing(entranceAnim, {
+                toValue: 1.1,
+                duration: 750,
+                useNativeDriver: true
+            }),
+            Animated.timing(entranceAnim, {
+                toValue: 1,
+                duration: 250,
+                useNativeDriver: true
+            })
+        ]).start();
+    }, [entranceAnim]);
+
+    return (
+        <Animated.View style={[styles.container, {transform: [{scale: entranceAnim}]}]}>
+            <View>
+                <Text style={[styles.text, {color: textColor}]}>The Next</Text>
+                <GradientText style={styles.text} textColor={textColor} text={`Generation`}/>
+                <Text style={[styles.text, {color: textColor}]}>Lung Cancer {`\n`}Risk Predictor</Text>
+            </View>
+            <PrimaryButton onPress={(event) => {alert('pressed')}} textSize={26} text='Get Started' colorScheme={colorScheme} styles={styles.buttonContainer}/>
+        </Animated.View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 100
+    },
+    text: {
+        fontFamily: 'mon-b',
+        textAlign: 'left',
+        fontSize: 50,
+    },
+    buttonContainer: {
+        paddingVertical: 15,
+        paddingHorizontal: 25,
+        borderRadius: 20,
+    },
+    button: {
+        height: 100,
+        width: 100
+    }
 });
