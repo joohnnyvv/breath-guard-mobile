@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {LinearGradient} from "expo-linear-gradient";
-import {Animated, ColorSchemeName, GestureResponderEvent, Pressable, Text, ViewStyle} from "react-native";
+import {Animated, ColorSchemeName, GestureResponderEvent, Pressable, Text, View, ViewStyle} from "react-native";
 import Colors from "@/constants/Colors";
 
 interface buttonProps {
@@ -8,10 +8,11 @@ interface buttonProps {
     colorScheme: ColorSchemeName,
     styles: ViewStyle,
     textSize?: number,
+    bgColor?: string,
     onPress?: (event: GestureResponderEvent) => void;
 }
 
-function PrimaryButton(props: buttonProps) {
+function SecondaryButton(props: buttonProps) {
     const buttonTextColor = props.colorScheme === 'dark' ? Colors.dark.text : Colors.light.textInverted;
     const [isPressed, setIsPressed] = useState(false);
 
@@ -21,11 +22,8 @@ function PrimaryButton(props: buttonProps) {
             onPressIn={() => setIsPressed(true)}
             onPressOut={() => setIsPressed(false)}
         >
-            <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={Colors[props.colorScheme ?? 'light'].gradient}
-                style={[props.styles, {alignItems: 'center', justifyContent: 'center'}]}
+            <View
+                style={[props.styles, {alignItems: 'center', justifyContent: 'center', backgroundColor: props.bgColor}]}
             >
                 <Text style={{
                     color: isPressed ? 'rgba(255,255,255,0.49)' : buttonTextColor,
@@ -35,9 +33,9 @@ function PrimaryButton(props: buttonProps) {
                 }}>
                     {props.text}
                 </Text>
-            </LinearGradient>
+            </View>
         </Pressable>
     );
 }
 
-export default PrimaryButton;
+export default SecondaryButton;

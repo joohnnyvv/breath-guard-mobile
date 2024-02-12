@@ -45,6 +45,7 @@ export default function TabLayout() {
                 name="educational"
                 options={{
                     title: 'Educational',
+                    headerShown: false,
                     tabBarIcon: ({color}) => <TabBarIcon name="book" color={color}/>,
                 }}
             />
@@ -52,6 +53,7 @@ export default function TabLayout() {
                 name="about"
                 options={{
                     title: 'About',
+                    headerShown: false,
                     tabBarIcon: ({color}) => <TabBarIcon name="info" color={color}/>,
                 }}
             />
