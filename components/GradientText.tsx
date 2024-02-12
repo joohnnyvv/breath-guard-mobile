@@ -1,4 +1,4 @@
-import {View, Text, TextStyle} from "react-native";
+import {Text, TextStyle} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 

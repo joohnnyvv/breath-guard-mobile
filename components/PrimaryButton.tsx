@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {LinearGradient} from "expo-linear-gradient";
-import {Animated, ColorSchemeName, GestureResponderEvent, Pressable, Text, ViewStyle} from "react-native";
+import {ColorSchemeName, GestureResponderEvent, Pressable, Text, ViewStyle} from "react-native";
 import Colors from "@/constants/Colors";
 
 interface buttonProps {

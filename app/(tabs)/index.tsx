@@ -1,5 +1,4 @@
-import {Animated, StyleSheet} from 'react-native';
-import {Text, View} from 'react-native';
+import {Animated, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Colors from '@/constants/Colors';
 import {useColorScheme} from '@/components/useColorScheme';
 import GradientText from "@/components/GradientText";
@@ -17,7 +16,7 @@ export default function GetStarted() {
             Animated.timing(entranceAnim, {
                 toValue: 1.1,
                 duration: 750,
-                useNativeDriver: true
+                useNativeDriver: true,
             }),
             Animated.timing(entranceAnim, {
                 toValue: 1,
@@ -28,14 +27,21 @@ export default function GetStarted() {
     }, [entranceAnim]);
 
     return (
-        <Animated.View style={[styles.container, {transform: [{scale: entranceAnim}]}]}>
-            <View>
-                <Text style={[styles.text, {color: textColor}]}>The Next</Text>
-                <GradientText style={styles.text} textColor={textColor} text={`Generation`}/>
-                <Text style={[styles.text, {color: textColor}]}>Lung Cancer {`\n`}Risk Predictor</Text>
-            </View>
-            <PrimaryButton onPress={(event) => {alert('pressed')}} textSize={26} text='Get Started' colorScheme={colorScheme} styles={styles.buttonContainer}/>
-        </Animated.View>
+        <ScrollView contentContainerStyle={{
+            height:'100%',
+            alignItems:'center'
+        }}>
+            <Animated.View style={[styles.container, {transform: [{scale: entranceAnim}]}]}>
+                <View>
+                    <Text style={[styles.text, {color: textColor}]}>The Next</Text>
+                    <GradientText style={styles.text} textColor={textColor} text={`Generation`}/>
+                    <Text style={[styles.text, {color: textColor}]}>Lung Cancer {`\n`}Risk Predictor</Text>
+                </View>
+                <PrimaryButton onPress={(event) => {
+                    alert('pressed')
+                }} textSize={26} text='Get Started' colorScheme={colorScheme} styles={styles.buttonContainer}/>
+            </Animated.View>
+        </ScrollView>
     );
 }
 
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 100
+        gap: 100,
     },
     text: {
         fontFamily: 'mon-b',
