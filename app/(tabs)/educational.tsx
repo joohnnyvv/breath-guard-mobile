@@ -1,13 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, FlatList, Linking, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useColorScheme} from "@/components/useColorScheme";
-import Colors from "@/constants/Colors";
+import Colors from "@/constants/Colors/Colors";
 import cancerDataItem, {cancerImpact, preventionImportance} from "@/constants/tabs/Educational";
 import SecondaryButton from "@/components/SecondaryButton";
+import {getTextColor} from "@/constants/Colors/Helpers";
 
 function Educational() {
     const colorScheme = useColorScheme();
-    const textColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
+    const textColor = getTextColor();
     const headerAnim = useRef(new Animated.Value(0)).current;
     const firstListAnim = useRef(new Animated.Value(-1000)).current;
     const secondListAnim = useRef(new Animated.Value(-1000)).current;

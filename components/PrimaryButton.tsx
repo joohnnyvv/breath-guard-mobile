@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LinearGradient} from "expo-linear-gradient";
 import {ColorSchemeName, GestureResponderEvent, Pressable, Text, ViewStyle} from "react-native";
-import Colors from "@/constants/Colors";
+import Colors from "@/constants/Colors/Colors";
 
 interface buttonProps {
     text: string

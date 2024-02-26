@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ColorSchemeName, GestureResponderEvent, Pressable, Text, View, ViewStyle} from "react-native";
-import Colors from "@/constants/Colors";
+import Colors from "@/constants/Colors/Colors";
 
 interface buttonProps {
     text: string

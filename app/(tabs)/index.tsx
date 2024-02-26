@@ -1,14 +1,15 @@
 import {Animated, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Colors from '@/constants/Colors';
 import {useColorScheme} from '@/components/useColorScheme';
 import GradientText from "@/components/GradientText";
 import PrimaryButton from "@/components/PrimaryButton";
 import {useEffect, useRef} from "react";
+import {router} from "expo-router";
+import {getTextColor} from "@/constants/Colors/Helpers";
 
 export default function GetStarted() {
     const colorScheme = useColorScheme();
 
-    const textColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
+    const textColor = getTextColor();
     const entranceAnim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
@@ -37,9 +38,7 @@ export default function GetStarted() {
                     <GradientText style={styles.text} textColor={textColor} text={`Generation`}/>
                     <Text style={[styles.text, {color: textColor}]}>Lung Cancer {`\n`}Risk Predictor</Text>
                 </View>
-                <PrimaryButton onPress={(event) => {
-                    alert('pressed')
-                }} textSize={26} text='Get Started' colorScheme={colorScheme} styles={styles.buttonContainer}/>
+                <PrimaryButton onPress={(event) => router.push('/predictionForm/')} textSize={26} text='Get Started' colorScheme={colorScheme} styles={styles.buttonContainer}/>
             </Animated.View>
         </ScrollView>
     );

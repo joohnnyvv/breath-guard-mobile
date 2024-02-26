@@ -1,13 +1,11 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, Image, Linking, ScrollView, StyleSheet, Text, View} from "react-native";
-import {useColorScheme} from "@/components/useColorScheme";
-import Colors from "@/constants/Colors";
+import {Animated, Image, Linking, ScrollView, StyleSheet, View} from "react-native";
 import {ContactItemsData} from "@/constants/tabs/About";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {getTextColor} from "@/constants/Colors/Helpers";
 
 function About() {
-    const colorScheme = useColorScheme();
-    const textColor = colorScheme === 'dark' ? Colors.dark.text : Colors.light.text;
+    const textColor = getTextColor()
     const headerFadeInAnim = useRef(new Animated.Value(0)).current;
     const descFadeInAnim = useRef(new Animated.Value(0)).current;
     const contactFadeInAnim = useRef(new Animated.Value(0)).current;
@@ -60,7 +58,7 @@ function About() {
         }}>
             <View style={styles.container}>
                 <Image style={styles.myImg} source={require('../../assets/my-img.jpeg')}/>
-                    <Animated.Text style={[styles.header, {color: textColor, opacity: headerFadeInAnim}]}>{`Hi, \nI am Jan Rembikowski`}</Animated.Text>
+                    <Animated.Text style={[styles.header, {color: textColor, opacity: headerFadeInAnim}]}>{`Hi! \nI am Jan Rembikowski`}</Animated.Text>
                     <Animated.Text
                         style={[styles.text, {color: textColor, opacity: descFadeInAnim}]}>{`Computer science student combining technical skills with personal motivation. During my studies, I co-developed a machine learning model for lung cancer prediction. Witnessing the disease's impact firsthand fueled my passion to transform this project into accessible mobile and web app tools.`}</Animated.Text>
                     <Animated.View style={[styles.contactContainer, {opacity: contactFadeInAnim}]}>

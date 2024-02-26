@@ -5,49 +5,51 @@ import * as SplashScreen from 'expo-splash-screen';
 import {useEffect} from 'react';
 
 import {useColorScheme} from '@/components/useColorScheme';
+import {getTextColor} from "@/constants/Colors/Helpers";
 
 export {
-  ErrorBoundary,
+    ErrorBoundary,
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+    initialRouteName: '(tabs)',
 };
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-   'mon': require('../assets/fonts/Montserrat-Regular.ttf'),
-   'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
-   'mon-b': require('../assets/fonts/Montserrat-Bold.ttf')
-  });
+    const [loaded, error] = useFonts({
+        'mon': require('../assets/fonts/Montserrat-Regular.ttf'),
+        'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
+        'mon-b': require('../assets/fonts/Montserrat-Bold.ttf')
+    });
 
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    useEffect(() => {
+        if (error) throw error;
+    }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    useEffect(() => {
+        if (loaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [loaded]);
+
+    if (!loaded) {
+        return null;
     }
-  }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
+    return <RootLayoutNav/>;
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+    const colorScheme = useColorScheme();
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <Stack>
+                <Stack.Screen name="(tabs)" options={{headerShown: false, title: 'Get Started'}}/>
+                <Stack.Screen name="predictionForm/index" options={{title: '', headerTintColor: getTextColor()}}/>
+            </Stack>
+        </ThemeProvider>
+    );
 }

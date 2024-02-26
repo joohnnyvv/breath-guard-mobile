@@ -11,6 +11,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
     secondaryBackground: '#b07ce8',
+    accent: '#7d19ff',
     gradient: gradient
   },
   dark: {
@@ -21,6 +22,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     secondaryBackground: '#115ac7',
+    accent: '#7d00fb',
     gradient: gradient
   },
 };
