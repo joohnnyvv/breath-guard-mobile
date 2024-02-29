@@ -6,6 +6,7 @@ import { ColorSchemeName, GestureResponderEvent, View } from "react-native";
 interface NavButtonsProps {
   colorScheme: ColorSchemeName;
   onSubmit: (event: GestureResponderEvent) => void;
+  toPrevPage?: (event: GestureResponderEvent) => void;
   isBackButtonVisible: boolean;
 }
 
@@ -14,6 +15,7 @@ export default function NavButtons(props: NavButtonsProps) {
     <View
       style={{
         flexDirection: "row",
+        justifyContent: "space-evenly",
         gap: 44,
       }}
     >
@@ -28,7 +30,7 @@ export default function NavButtons(props: NavButtonsProps) {
               : Colors.light.secondaryBackground
           }
           textSize={26}
-          onPress={(event) => props.onSubmit(event)}
+          onPress={(event) => props.toPrevPage?.(event)}
         />
       )}
       <SecondaryButton

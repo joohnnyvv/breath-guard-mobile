@@ -8,12 +8,9 @@ import DateTimePicker, {
 import Colors from "@/constants/Colors/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Picker } from "@react-native-picker/picker";
-import NavButtons from "./NavButtons/NavButtons";
 
 interface AgeAndGenderProps {
-  updateUserData: (userData: number[]) => void;
-  toNextPage: () => void;
-  userData: number[];
+  updateUserData: (dataInfo: { value: number; index: number }) => void;
 }
 
 function AgeAndGender(props: AgeAndGenderProps) {
@@ -39,21 +36,14 @@ function AgeAndGender(props: AgeAndGenderProps) {
     if (selectedDate) {
       setDate(selectedDate);
     }
-    const age = calculateAge(date);
-    setAge(age);
+    const selectedAge = calculateAge(date);
+    setAge(selectedAge);
+    props.updateUserData({ value: selectedAge, index: 0 });
   };
 
   const onSexChange = (selectedSex: number) => {
     setGender(selectedSex);
-  };
-
-  const onSubmit = (event: GestureResponderEvent) => {
-    const updatedUserData = [...props.userData];
-
-    updatedUserData[0] = age;
-    updatedUserData[1] = Number(gender);
-    props.toNextPage();
-    props.updateUserData(updatedUserData);
+    props.updateUserData({ value: selectedSex, index: 1 });
   };
 
   const calculateAge = (birthDate: Date) => {
@@ -94,7 +84,7 @@ function AgeAndGender(props: AgeAndGenderProps) {
           </Text>
           <Picker
             selectedValue={gender}
-            onValueChange={(itemValue, itemIndex) => onSexChange(itemValue)}
+            onValueChange={(itemValue) => onSexChange(itemValue)}
             style={[predictionFormStyles.genderPicker]}
             itemStyle={{ color: textColor }}
           >
@@ -103,11 +93,6 @@ function AgeAndGender(props: AgeAndGenderProps) {
           </Picker>
         </View>
       </Animated.View>
-      <NavButtons
-        colorScheme={colorScheme}
-        onSubmit={onSubmit}
-        isBackButtonVisible={false}
-      />
     </View>
   );
 }

@@ -4,7 +4,7 @@ export const predictionFormStyles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 40
+        gap: 40,
     },
     questionText: {
         textAlign: 'center',
