@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View, useColorScheme, Dimensions } from "react-native";
 import AgeAndGender from "@/components/PredictionFormPages/AgeAndGender";
 import Pagination from "@/components/Pagination";
-import AssessingForm from "./AssessingForm";
+import AssessingForm from "../../components/PredictionFormPages/AssessingForm";
 import { AirPollutionInfo } from "@/constants/PredictionFormInfo/PredictionFormInfo";
+import NavButtons from "@/components/PredictionFormPages/NavButtons/NavButtons";
 
 function PredictionFormPage() {
   const [userData, setUserData] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const colorScheme = useColorScheme();
+  const windowHeight = Dimensions.get("window").height;
+  const footerSpace = 320;
 
   const updateUserData = (dataInfo: { index: number; value: number }) => {
     setUserData((prevUserData) => {
@@ -15,7 +19,6 @@ function PredictionFormPage() {
       newUserData[dataInfo.index] = dataInfo.value;
       return newUserData;
     });
-    console.log(userData);
   };
 
   const toNextPage = () => {
@@ -24,6 +27,7 @@ function PredictionFormPage() {
     } else {
       return;
     }
+    console.log(userData);
   };
 
   const toPreviousPage = () => {
@@ -35,15 +39,17 @@ function PredictionFormPage() {
   };
 
   return (
-    <ScrollView>
-      <View
+    <View>
+      <ScrollView
         style={{
           paddingTop: 40,
-          paddingBottom: 30,
           paddingHorizontal: 20,
+          gap: 40,
+          height: windowHeight - footerSpace,
+        }}
+        contentContainerStyle={{
           alignItems: "center",
           justifyContent: "center",
-          gap: 40,
         }}
       >
         {currentPage === 1 ? (
@@ -55,9 +61,22 @@ function PredictionFormPage() {
             labelMax={AirPollutionInfo.labelMax}
           />
         )}
+      </ScrollView>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <NavButtons
+          colorScheme={colorScheme}
+          isBackButtonVisible={currentPage !== 1}
+          onSubmit={toNextPage}
+          toPrevPage={toPreviousPage}
+        />
         <Pagination numberOfPages={7} currentPage={currentPage} />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

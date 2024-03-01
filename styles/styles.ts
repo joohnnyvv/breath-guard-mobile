@@ -4,7 +4,7 @@ export const predictionFormStyles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 40,
+        gap: 90,
     },
     questionText: {
         textAlign: 'center',
@@ -22,5 +22,24 @@ export const predictionFormStyles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingVertical: 12,
         borderRadius: 20
+    },
+    sliderInputContainer: {
+        gap: 30,
+        alignItems: 'center'
+    },
+    labelsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    labelText: {
+        fontFamily: 'mon-sb',
+        fontSize: 20,
+        width: 160,
+        textAlign: 'center'
+    },
+    slider: {
+         width: 300, 
+         height: 50 
     }
 })

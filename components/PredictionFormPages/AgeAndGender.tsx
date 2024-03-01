@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, GestureResponderEvent, Text, View } from "react-native";
+import { Animated, Text, View } from "react-native";
 import { getTextColor } from "@/constants/Colors/Helpers";
 import { predictionFormStyles } from "@/styles/styles";
 import DateTimePicker, {
